@@ -29,14 +29,14 @@ export default function Chat() {
     <div className="w-full h-screen flex items-center justify-center bg-gradient-to-br from-neutral-50 to-white">
       <div className="w-full h-full md:max-w-xl md:h-[calc(100vh-4rem)] md:shadow-xl md:rounded-xl flex flex-col bg-white overflow-hidden">
         <div className="flex-1 overflow-hidden flex flex-col">
-          <div className="flex-1 overflow-hidden relative">
+          <div className="flex-1 overflow-hidden relative flex flex-col">
             {showTitle && (
-              <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl sm:text-5xl font-bold text-neutral-900 transition-opacity duration-500 opacity-100">
+              <h1 className="text-4xl sm:text-5xl font-bold text-neutral-900 transition-opacity duration-500 opacity-100 py-6 text-center">
                 Argento
               </h1>
             )}
             <div
-              className={`h-full overflow-y-auto px-4 py-6 space-y-4 transition-opacity duration-500 ${
+              className={`flex-1 overflow-y-auto px-4 py-6 space-y-4 transition-opacity duration-500 ${
                 showTitle ? "opacity-0" : "opacity-100"
               }`}
               ref={chatContainerRef}
