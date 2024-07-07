@@ -16,113 +16,105 @@ export default function Chat() {
     if (status === "awaiting_message") {
       inputRef.current?.focus();
     }
-    chatContainerRef.current?.scrollTo(
-      0,
-      chatContainerRef.current.scrollHeight
-    );
-    if (messages.length > 0) {
-      setShowTitle(false);
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
+    setShowTitle(messages.length === 0);
   }, [status, messages]);
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-gradient-to-br from-neutral-50 to-white">
-      <div className="w-full h-full md:max-w-xl md:h-[calc(100vh-4rem)] md:shadow-xl md:rounded-xl flex flex-col bg-white overflow-hidden">
-        <div className="flex-1 overflow-hidden flex flex-col">
-          <div className="flex-1 overflow-hidden relative flex flex-col">
-            <h1
-              className={`text-4xl sm:text-5xl font-bold text-neutral-900 transition-opacity duration-500 py-6 text-center ${
-                showTitle ? "opacity-100" : "opacity-0 h-0 py-0"
-              }`}
-            >
-              Argento
-            </h1>
-            <div
-              className={`flex-1 overflow-y-auto px-4 py-6 space-y-4 transition-opacity duration-500 ${
-                showTitle ? "" : "opacity-100"
-              }`}
-              ref={chatContainerRef}
-            >
-              {error != null && (
-                <div className="p-3 bg-red-50 text-red-700 text-sm rounded-lg shadow-sm">
-                  <p className="font-medium">
-                    Error: {(error as any).toString()}
-                  </p>
-                </div>
-              )}
+    <div className="w-full h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="w-full h-full md:max-w-2xl md:h-[calc(100vh-2rem)] md:shadow-2xl md:rounded-3xl flex flex-col bg-white overflow-hidden">
+        <div className="flex-1 overflow-hidden flex flex-col relative">
+          <h1
+            className={`text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 transition-all duration-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
+              showTitle ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
+          >
+            Argento
+          </h1>
+          <div
+            className={`flex-1 overflow-y-auto px-4 sm:px-6 py-6 sm:py-8 space-y-4 sm:space-y-6 transition-opacity duration-500 ${
+              showTitle ? "opacity-0" : "opacity-100"
+            }`}
+            ref={chatContainerRef}
+          >
+            {error && (
+              <div className="p-3 sm:p-4 bg-red-50 text-red-700 text-xs sm:text-sm rounded-full shadow-md">
+                <p className="font-medium">Error: {error.toString()}</p>
+              </div>
+            )}
 
-              {messages.map((m: Message) => (
-                <div
-                  key={m.id}
-                  className={`p-3 rounded-lg shadow-sm ${
-                    m.role === "user"
-                      ? "bg-blue-100 ml-auto text-blue-900"
-                      : "bg-neutral-100 border border-neutral-200"
-                  }`}
-                  style={{ maxWidth: "85%" }}
-                >
-                  <p
-                    className={`font-medium ${
-                      m.role === "assistant"
-                        ? "text-neutral-900"
-                        : "text-blue-900"
-                    } text-xs mb-1`}
-                  >
-                    {m.role === "assistant" ? "Argento" : "You"}
-                  </p>
-                  {m.role !== "data" && (
-                    <p className="text-neutral-700 text-sm whitespace-pre-wrap">
-                      {m.content}
-                    </p>
-                  )}
-                  {m.role === "data" && (
-                    <>
-                      <p className="text-neutral-700 text-sm">
-                        {(m.data as any).description}
-                      </p>
-                      <pre className="mt-2 p-2 bg-neutral-50 rounded-lg text-xs overflow-x-auto">
-                        {JSON.stringify(m.data, null, 2)}
-                      </pre>
-                    </>
-                  )}
-                </div>
-              ))}
-
-              {status === "in_progress" && (
-                <div className="flex items-center space-x-2 p-2">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                  <div
-                    className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"
-                    style={{ animationDelay: "0.2s" }}
-                  ></div>
-                  <div
-                    className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"
-                    style={{ animationDelay: "0.4s" }}
-                  ></div>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="p-4 bg-neutral-50 border-t border-neutral-200">
-            <form onSubmit={submitMessage} className="flex space-x-2">
-              <input
-                ref={inputRef}
-                disabled={status !== "awaiting_message"}
-                className="flex-1 p-3 bg-white border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-shadow duration-200"
-                value={input}
-                placeholder="Ask about Argentina..."
-                onChange={handleInputChange}
-              />
-              <button
-                type="submit"
-                disabled={status !== "awaiting_message"}
-                className="p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 disabled:opacity-50"
+            {messages.map((m: Message) => (
+              <div
+                key={m.id}
+                className={`p-3 sm:p-4 rounded-full shadow-md ${
+                  m.role === "user"
+                    ? "bg-gray-200 ml-auto text-gray-900"
+                    : "bg-gray-100 border border-gray-200"
+                }`}
+                style={{ maxWidth: "85%" }}
               >
-                <FaPaperPlane className="w-5 h-5" />
-              </button>
-            </form>
+                <p
+                  className={`font-medium ${
+                    m.role === "assistant" ? "text-gray-700" : "text-gray-800"
+                  } text-xs mb-1 sm:mb-2`}
+                >
+                  {m.role === "assistant" ? "Argento" : "You"}
+                </p>
+                {m.role !== "data" ? (
+                  <p className="text-gray-700 text-xs sm:text-sm whitespace-pre-wrap">
+                    {m.content}
+                  </p>
+                ) : (
+                  <>
+                    <p className="text-gray-700 text-xs sm:text-sm">
+                      {(m.data as any).description}
+                    </p>
+                    <pre className="mt-2 sm:mt-3 p-2 sm:p-3 bg-gray-50 rounded-xl text-xs overflow-x-auto">
+                      {JSON.stringify(m.data, null, 2)}
+                    </pre>
+                  </>
+                )}
+              </div>
+            ))}
+
+            {status === "in_progress" && (
+              <div className="flex items-center space-x-2 p-3">
+                {[0, 1, 2].map((i) => (
+                  <div
+                    key={i}
+                    className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full animate-pulse"
+                    style={{ animationDelay: `${i * 0.2}s` }}
+                  ></div>
+                ))}
+              </div>
+            )}
           </div>
+        </div>
+
+        <div className="p-4 sm:p-6 bg-gray-50 border-t border-gray-200">
+          <form
+            onSubmit={submitMessage}
+            className="flex space-x-2 sm:space-x-3"
+          >
+            <input
+              ref={inputRef}
+              disabled={status !== "awaiting_message"}
+              className="flex-1 p-3 sm:p-4 bg-white border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500 text-xs sm:text-sm transition-shadow duration-200"
+              value={input}
+              placeholder="Ask about Argentina..."
+              onChange={handleInputChange}
+            />
+            <button
+              type="submit"
+              disabled={status !== "awaiting_message"}
+              className="p-3 sm:p-4 bg-gray-800 text-white rounded-full hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors duration-200 disabled:opacity-50"
+            >
+              <FaPaperPlane className="w-4 h-4 sm:w-5 sm:h-5" />
+            </button>
+          </form>
         </div>
       </div>
     </div>
