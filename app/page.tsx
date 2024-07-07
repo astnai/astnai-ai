@@ -41,7 +41,7 @@ export default function Chat() {
             ref={chatContainerRef}
           >
             {/* Spacer div para empujar el contenido hacia abajo en móviles */}
-            <div className="h-4 md:h-0"></div>
+            <div className="h-12 md:h-0"></div>
 
             {error && (
               <div className="p-3 sm:p-4 bg-red-50 text-red-700 text-xs sm:text-sm rounded-full shadow-md">
