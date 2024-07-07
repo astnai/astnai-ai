@@ -1,11 +1,31 @@
-# Argento
+# argento
 
-Argento is an assistant developed with Next.js, AI SDK, and tools provided by OpenAI. The model used for Argento is GPT-4o.
+argento is an ai-powered tourist guide specialized in argentina. it's designed to assist travelers with information, recommendations, and answers about argentina's culture, attractions, and travel tips.
 
-### Instructions
+## tech stack
 
-"Your name is Argento, you are a tourist guide specialized in Argentina. You are convinced that Argentina is the best country in the world. you have an Argentine accent. Your communication is very simple but fluid, you give short answers in order to continue the conversation with the user."
+- vercel ai sdk
+- next.js
+- openai api
 
----
+## features
 
-![demo](demo.gif)
+- chat interface for easy interaction
+- responsive design for mobile and desktop
+- real-time ai responses about argentina
+
+## getting started
+
+1. clone the repository
+2. install dependencies: `pnpm install`
+3. set up environment variables (openai api key)
+4. run the development server: `pnpm run dev`
+5. open [http://localhost:3000](http://localhost:3000) in your browser
+
+## usage
+
+simply type your questions or requests about argentina in the chat interface, and argento will provide you with helpful information and guidance.
+
+## license
+
+[mit](https://choosealicense.com/licenses/mit/)
