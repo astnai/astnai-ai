@@ -114,13 +114,6 @@ export default function Chat() {
             >
               <FaPaperPlane className="w-5 h-5" />
             </button>
-            <button
-              type="button"
-              onClick={stop}
-              className="p-4 bg-neutral-200 text-neutral-600 rounded-lg hover:bg-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 transition-colors duration-200"
-            >
-              <FaStop className="w-5 h-5" />
-            </button>
           </form>
         </div>
       </div>
