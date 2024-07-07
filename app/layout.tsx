@@ -14,7 +14,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  themeColor: "#f0f9ff",
+  userScalable: false,
 };
 
 export default function RootLayout({
@@ -24,12 +24,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full">
-      <body
-        className={`${inter.className} antialiased bg-gradient-to-br from-neutral-50 to-white text-neutral-900 flex flex-col min-h-screen`}
-      >
-        <main className="flex-grow flex items-center justify-center p-4 sm:p-8">
-          {children}
-        </main>
+      <body className={`${inter.className} antialiased h-full`}>
+        {children}
       </body>
     </html>
   );
