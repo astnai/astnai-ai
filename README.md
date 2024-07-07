@@ -1,6 +1,6 @@
 # Argento
 
-Argento is an assistant developed with Next.js, AI SDK, and tools provided by OpenAI. The model used for Argento is GPT-3.5-turbo.
+Argento is an assistant developed with Next.js, AI SDK, and tools provided by OpenAI. The model used for Argento is GPT-4o.
 
 ### Instructions
 
