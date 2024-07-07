@@ -30,14 +30,16 @@ export default function Chat() {
       <div className="w-full h-full md:max-w-xl md:h-[calc(100vh-4rem)] md:shadow-xl md:rounded-xl flex flex-col bg-white overflow-hidden">
         <div className="flex-1 overflow-hidden flex flex-col">
           <div className="flex-1 overflow-hidden relative flex flex-col">
-            {showTitle && (
-              <h1 className="text-4xl sm:text-5xl font-bold text-neutral-900 transition-opacity duration-500 opacity-100 py-6 text-center">
-                Argento
-              </h1>
-            )}
+            <h1
+              className={`text-4xl sm:text-5xl font-bold text-neutral-900 transition-opacity duration-500 py-6 text-center ${
+                showTitle ? "opacity-100" : "opacity-0 h-0 py-0"
+              }`}
+            >
+              Argento
+            </h1>
             <div
               className={`flex-1 overflow-y-auto px-4 py-6 space-y-4 transition-opacity duration-500 ${
-                showTitle ? "opacity-0" : "opacity-100"
+                showTitle ? "" : "opacity-100"
               }`}
               ref={chatContainerRef}
             >
