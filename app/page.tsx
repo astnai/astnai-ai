@@ -3,6 +3,11 @@
 import { Message, useAssistant } from "ai/react";
 import { useEffect, useRef, useState } from "react";
 import { FaPaperPlane } from "react-icons/fa";
+import Image from "next/image";
+import { useTheme } from "next-themes";
+import ReactMarkdown from "react-markdown";
+import logoMeBlack from "./logoMeBlack.png";
+import logoMeWhite from "./logoMeWhite.png";
 
 export default function Chat() {
   const { status, messages, input, submitMessage, handleInputChange, error } =
@@ -10,7 +15,13 @@ export default function Chat() {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
-  const [showTitle, setShowTitle] = useState(true);
+  const [showLogo, setShowLogo] = useState(true);
+  const [mounted, setMounted] = useState(false);
+  const { theme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (status === "awaiting_message") {
@@ -20,105 +31,109 @@ export default function Chat() {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
-    setShowTitle(messages.length === 0);
+    setShowLogo(messages.length === 0 && status === "awaiting_message");
   }, [status, messages]);
 
+  if (!mounted) return null;
+
+  const logoSrc = theme === "dark" ? logoMeWhite : logoMeBlack;
+
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="w-full h-full md:max-w-2xl md:h-[calc(100vh-2rem)] md:shadow-2xl md:rounded-3xl flex flex-col bg-white overflow-hidden">
+    <div className="w-full h-screen flex items-center justify-center bg-white dark:bg-black">
+      <div className="w-full h-full max-w-xl flex flex-col bg-white dark:bg-black overflow-hidden p-4">
         <div className="flex-1 overflow-hidden flex flex-col relative">
-          <h1
-            className={`text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 transition-all duration-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
-              showTitle ? "opacity-100 z-10" : "opacity-0 z-0"
+          <div
+            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 z-10 ${
+              showLogo ? "opacity-100" : "opacity-0"
             }`}
           >
-            Argento
-          </h1>
+            <Image src={logoSrc} alt="Astnai Logo" width={100} height={100} />
+          </div>
           <div
-            className={`flex-1 overflow-y-auto px-4 sm:px-6 py-6 sm:py-8 space-y-4 sm:space-y-6 transition-opacity duration-500 ${
-              showTitle ? "opacity-0" : "opacity-100"
+            className={`flex-1 overflow-y-auto space-y-6 transition-opacity duration-500 ${
+              showLogo ? "opacity-0" : "opacity-100"
             }`}
             ref={chatContainerRef}
           >
-            {/* Spacer div para empujar el contenido hacia abajo en móviles */}
-            <div className="h-12 md:h-0"></div>
-
-            {error && (
-              <div className="p-3 sm:p-4 bg-red-50 text-red-700 text-xs sm:text-sm rounded-full shadow-md">
-                <p className="font-medium">Error: {error.toString()}</p>
-              </div>
-            )}
-
             {messages.map((m: Message) => (
               <div
                 key={m.id}
-                className={`p-3 sm:p-4 rounded-full shadow-md ${
-                  m.role === "user"
-                    ? "bg-gray-200 ml-auto text-gray-900"
-                    : "bg-gray-100 border border-gray-200"
+                className={`flex ${
+                  m.role === "user" ? "justify-end" : "justify-start"
                 }`}
-                style={{ maxWidth: "85%" }}
               >
-                <p
-                  className={`font-medium ${
-                    m.role === "assistant" ? "text-gray-700" : "text-gray-800"
-                  } text-xs mb-1 sm:mb-2`}
+                <div
+                  className={`${
+                    m.role === "user"
+                      ? "bg-gray-100 dark:bg-[#2c2c2c] text-black dark:text-white rounded-full"
+                      : "text-black dark:text-white flex items-start rounded-full"
+                  }`}
+                  style={{ maxWidth: "100%" }}
                 >
-                  {m.role === "assistant" ? "Argento" : "You"}
-                </p>
-                {m.role !== "data" ? (
-                  <p className="text-gray-700 text-xs sm:text-sm whitespace-pre-wrap">
-                    {m.content}
-                  </p>
-                ) : (
-                  <>
-                    <p className="text-gray-700 text-xs sm:text-sm">
-                      {(m.data as any).description}
-                    </p>
-                    <pre className="mt-2 sm:mt-3 p-2 sm:p-3 bg-gray-50 rounded-xl text-xs overflow-x-auto">
-                      {JSON.stringify(m.data, null, 2)}
-                    </pre>
-                  </>
-                )}
+                  {m.role === "assistant" && (
+                    <div className="flex-shrink-0 mt-1 mr-2">
+                      <Image
+                        src={logoSrc}
+                        alt="Astnai"
+                        width={24}
+                        height={24}
+                      />
+                    </div>
+                  )}
+                  <ReactMarkdown
+                    className="inline-block text-sm whitespace-pre-wrap p-3"
+                    components={{
+                      a: ({ node, ...props }) => (
+                        <a
+                          {...props}
+                          className="text-blue-500 hover:underline"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        />
+                      ),
+                    }}
+                  >
+                    {m.content.replace(/【.*?】/g, "")}
+                  </ReactMarkdown>
+                </div>
               </div>
             ))}
 
             {status === "in_progress" && (
-              <div className="flex items-center space-x-2 p-3">
+              <div className="flex items-center space-x-2">
                 {[0, 1, 2].map((i) => (
                   <div
                     key={i}
-                    className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-500 rounded-full animate-pulse"
+                    className="w-2 h-2 bg-gray-400 dark:bg-gray-600 rounded-full animate-pulse"
                     style={{ animationDelay: `${i * 0.2}s` }}
                   ></div>
                 ))}
               </div>
             )}
-            <div className="h-4 md:h-0"></div>
           </div>
         </div>
 
-        <div className="p-4 sm:p-6 bg-gray-50 border-t border-gray-200">
-          <form
-            onSubmit={submitMessage}
-            className="flex space-x-2 sm:space-x-3"
-          >
+        <div className="mt-4 bg-white dark:bg-black border-t border-gray-200 dark:border-gray-800 pt-4">
+          <form onSubmit={submitMessage} className="relative">
             <input
               ref={inputRef}
               disabled={status !== "awaiting_message"}
-              className="flex-1 p-3 sm:p-4 bg-white border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500 text-xs sm:text-sm transition-shadow duration-200"
+              className="w-full p-4 bg-gray-100 dark:bg-[#2c2c2c] text-black dark:text-white rounded-full focus:outline-none focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-600 text-sm transition-shadow duration-200"
               value={input}
-              placeholder="Ask about Argentina..."
+              placeholder="Type your message..."
               onChange={handleInputChange}
             />
             <button
               type="submit"
               disabled={status !== "awaiting_message"}
-              className="p-3 sm:p-4 bg-gray-800 text-white rounded-full hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors duration-200 disabled:opacity-50"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 dark:text-gray-600 dark:hover:text-gray-400 focus:outline-none transition-colors duration-200"
             >
-              <FaPaperPlane className="w-4 h-4 sm:w-5 sm:h-5" />
+              <FaPaperPlane className="w-5 h-5" />
             </button>
           </form>
+          <p className="text-center text-xs font-mono mt-4 text-gray-500 dark:text-gray-400">
+            astnai may make mistakes, don't take the answers seriously
+          </p>
         </div>
       </div>
     </div>

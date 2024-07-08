@@ -13,10 +13,13 @@
     "@ai-sdk/react": "latest",
     "ai": "latest",
     "next": "latest",
+    "next-themes": "^0.3.0",
     "openai": "4.47.1",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
+    "react-markdown": "^9.0.1",
+    "react-type-animation": "^3.2.0",
     "zod": "3.23.8"
   },
   "devDependencies": {

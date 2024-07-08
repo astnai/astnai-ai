@@ -11,12 +11,20 @@ body {
   background: linear-gradient(to bottom right, #f9fafb, #f3f4f6);
 }
 
+.dark body {
+  background: linear-gradient(to bottom right, #111827, #1f2937);
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #374151;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -26,4 +34,12 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
 }
