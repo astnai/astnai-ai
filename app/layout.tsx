@@ -6,8 +6,8 @@ import { ThemeProvider } from "next-themes";
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Astnai",
-  description: "Chat with Astnai.",
+  title: "astnai",
+  description: "Chat with astnai.",
 };
 
 export const viewport: Viewport = {

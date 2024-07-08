@@ -113,14 +113,14 @@ export default function Chat() {
           </div>
         </div>
 
-        <div className="mt-4 bg-white dark:bg-black border-t border-gray-200 dark:border-gray-800 pt-4">
+        <div className="mt-4 bg-white dark:bg-black">
           <form onSubmit={submitMessage} className="relative">
             <input
               ref={inputRef}
               disabled={status !== "awaiting_message"}
-              className="w-full p-4 bg-gray-100 dark:bg-[#2c2c2c] text-black dark:text-white rounded-full focus:outline-none focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-600 text-sm transition-shadow duration-200"
+              className="w-full p-3.5 bg-gray-100 dark:bg-[#2c2c2c] text-black dark:text-white rounded-full focus:outline-none"
               value={input}
-              placeholder="Type your message..."
+              placeholder="message astnai"
               onChange={handleInputChange}
             />
             <button
@@ -132,7 +132,7 @@ export default function Chat() {
             </button>
           </form>
           <p className="text-center text-xs font-mono mt-4 text-gray-500 dark:text-gray-400">
-            astnai may make mistakes, don't take the answers seriously
+            astnai can make mistakes
           </p>
         </div>
       </div>
