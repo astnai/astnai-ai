@@ -1,7 +1,7 @@
 "use client";
 
+import React, { useEffect, useRef, useState } from "react";
 import { Message, useAssistant } from "ai/react";
-import { useEffect, useRef, useState } from "react";
 import { FaPaperPlane } from "react-icons/fa";
 import Image from "next/image";
 import { useTheme } from "next-themes";
@@ -10,13 +10,15 @@ import logoMeBlack from "./logoMeBlack.png";
 import logoMeWhite from "./logoMeWhite.png";
 
 export default function Chat() {
-  const { status, messages, input, submitMessage, handleInputChange, error } =
+  const { status, messages, input, submitMessage, handleInputChange } =
     useAssistant({ api: "/api/assistant" });
-
   const inputRef = useRef<HTMLInputElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const [showLogo, setShowLogo] = useState(true);
   const [mounted, setMounted] = useState(false);
+  const [animatedMessages, setAnimatedMessages] = useState<Set<string>>(
+    new Set()
+  );
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -32,14 +34,25 @@ export default function Chat() {
         chatContainerRef.current.scrollHeight;
     }
     setShowLogo(messages.length === 0 && status === "awaiting_message");
-  }, [status, messages]);
+
+    const newMessages = messages.filter((m) => !animatedMessages.has(m.id));
+    if (newMessages.length > 0) {
+      setTimeout(() => {
+        setAnimatedMessages((prev) => {
+          const newSet = new Set(prev);
+          newMessages.forEach((m) => newSet.add(m.id));
+          return newSet;
+        });
+      }, 50);
+    }
+  }, [status, messages, animatedMessages]);
 
   if (!mounted) return null;
 
   const logoSrc = theme === "dark" ? logoMeWhite : logoMeBlack;
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-white dark:bg-black">
+    <div className="w-full h-screen flex items-center justify-center bg-white dark:bg-black pb-16">
       <div className="w-full h-full max-w-2xl flex flex-col bg-white dark:bg-black overflow-hidden p-4">
         <div className="flex-1 overflow-hidden flex flex-col relative">
           <div
@@ -50,7 +63,7 @@ export default function Chat() {
             <Image src={logoSrc} alt="Astnai Logo" width={100} height={100} />
           </div>
           <div
-            className={`flex-1 overflow-y-auto space-y-6 transition-opacity duration-500 ${
+            className={`flex-1 overflow-y-auto space-y-6 transition-opacity duration-500 chat-container ${
               showLogo ? "opacity-0" : "opacity-100"
             }`}
             ref={chatContainerRef}
@@ -67,6 +80,10 @@ export default function Chat() {
                     m.role === "user"
                       ? "bg-gray-100 dark:bg-[#2c2c2c] text-black dark:text-white rounded-full"
                       : "text-black dark:text-white flex items-start rounded-full"
+                  } ${
+                    m.role === "assistant" && !animatedMessages.has(m.id)
+                      ? "opacity-0"
+                      : ""
                   }`}
                   style={{ maxWidth: "100%" }}
                 >
@@ -77,6 +94,7 @@ export default function Chat() {
                         alt="Astnai"
                         width={24}
                         height={24}
+                        className="mt-1"
                       />
                     </div>
                   )}
@@ -98,18 +116,6 @@ export default function Chat() {
                 </div>
               </div>
             ))}
-
-            {status === "in_progress" && (
-              <div className="flex items-center space-x-2">
-                {[0, 1, 2].map((i) => (
-                  <div
-                    key={i}
-                    className="w-2 h-2 bg-gray-400 dark:bg-gray-600 rounded-full animate-pulse"
-                    style={{ animationDelay: `${i * 0.2}s` }}
-                  ></div>
-                ))}
-              </div>
-            )}
           </div>
         </div>
 
@@ -118,7 +124,7 @@ export default function Chat() {
             <input
               ref={inputRef}
               disabled={status !== "awaiting_message"}
-              className="w-full p-3.5 bg-gray-100 dark:bg-[#2c2c2c] text-black dark:text-white rounded-full focus:outline-none"
+              className="w-full p-3.5 pr-12 bg-gray-100 dark:bg-[#2c2c2c] text-black dark:text-white rounded-full focus:outline-none"
               value={input}
               placeholder="message astnai"
               onChange={handleInputChange}

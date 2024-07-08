@@ -9,10 +9,21 @@ html, body {
 
 body {
   background: linear-gradient(to bottom right, #f9fafb, #f3f4f6);
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .dark body {
   background: linear-gradient(to bottom right, #111827, #1f2937);
+}
+
+.chat-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.chat-container::-webkit-scrollbar {
+  display: none;
 }
 
 ::-webkit-scrollbar {
@@ -42,4 +53,24 @@ body {
 
 .dark ::-webkit-scrollbar-thumb:hover {
   background: #6b7280;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes typewriter {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.typewriter-effect span {
+  opacity: 0;
+  animation: typewriter 1s forwards;
+  animation-delay: calc(var(--index) * 0.03s);
 }
