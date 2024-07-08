@@ -4,10 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Message, useAssistant } from "ai/react";
 import { FaPaperPlane } from "react-icons/fa";
 import Image from "next/image";
-import { useTheme } from "next-themes";
 import ReactMarkdown from "react-markdown";
 import logoMeBlack from "./logoMeBlack.png";
-import logoMeWhite from "./logoMeWhite.png";
 
 export default function Chat() {
   const { status, messages, input, submitMessage, handleInputChange } =
@@ -19,10 +17,16 @@ export default function Chat() {
   const [animatedMessages, setAnimatedMessages] = useState<Set<string>>(
     new Set()
   );
-  const { theme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
+    const setVH = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
+    setVH();
+    window.addEventListener("resize", setVH);
+    return () => window.removeEventListener("resize", setVH);
   }, []);
 
   useEffect(() => {
@@ -49,18 +53,21 @@ export default function Chat() {
 
   if (!mounted) return null;
 
-  const logoSrc = theme === "dark" ? logoMeWhite : logoMeBlack;
-
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-white dark:bg-black pb-16">
-      <div className="w-full h-full max-w-2xl flex flex-col bg-white dark:bg-black overflow-hidden p-4">
+    <div className="w-full h-screen flex items-center justify-center bg-white">
+      <div className="w-full h-full max-w-2xl flex flex-col bg-white overflow-hidden p-4">
         <div className="flex-1 overflow-hidden flex flex-col relative">
           <div
             className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 z-10 ${
               showLogo ? "opacity-100" : "opacity-0"
             }`}
           >
-            <Image src={logoSrc} alt="Astnai Logo" width={100} height={100} />
+            <Image
+              src={logoMeBlack}
+              alt="Astnai Logo"
+              width={100}
+              height={100}
+            />
           </div>
           <div
             className={`flex-1 overflow-y-auto space-y-6 transition-opacity duration-500 chat-container ${
@@ -78,28 +85,26 @@ export default function Chat() {
                 <div
                   className={`${
                     m.role === "user"
-                      ? "bg-gray-100 dark:bg-[#2c2c2c] text-black dark:text-white rounded-full"
-                      : "text-black dark:text-white flex items-start rounded-full"
+                      ? "bg-gray-100 text-black rounded-3xl p-3"
+                      : "text-black flex items-center rounded-3xl p-3"
                   } ${
                     m.role === "assistant" && !animatedMessages.has(m.id)
                       ? "opacity-0"
                       : ""
-                  }`}
-                  style={{ maxWidth: "100%" }}
+                  } max-w-[80%] break-words`}
                 >
                   {m.role === "assistant" && (
                     <div className="flex-shrink-0 mt-1 mr-2">
                       <Image
-                        src={logoSrc}
+                        src={logoMeBlack}
                         alt="Astnai"
                         width={24}
                         height={24}
-                        className="mt-1"
                       />
                     </div>
                   )}
                   <ReactMarkdown
-                    className="inline-block text-sm whitespace-pre-wrap p-3"
+                    className="inline-block text-sm whitespace-pre-wrap"
                     components={{
                       a: ({ node, ...props }) => (
                         <a
@@ -119,12 +124,12 @@ export default function Chat() {
           </div>
         </div>
 
-        <div className="mt-4 bg-white dark:bg-black">
-          <form onSubmit={submitMessage} className="relative">
+        <div className="mt-auto bg-white">
+          <form onSubmit={submitMessage} className="relative flex items-center">
             <input
               ref={inputRef}
               disabled={status !== "awaiting_message"}
-              className="w-full p-3.5 pr-12 bg-gray-100 dark:bg-[#2c2c2c] text-black dark:text-white rounded-full focus:outline-none"
+              className="flex-grow p-3 pr-12 bg-gray-100 text-black rounded-full focus:outline-none"
               value={input}
               placeholder="message astnai"
               onChange={handleInputChange}
@@ -132,12 +137,12 @@ export default function Chat() {
             <button
               type="submit"
               disabled={status !== "awaiting_message"}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-gray-600 dark:text-gray-600 dark:hover:text-gray-400 focus:outline-none transition-colors duration-200"
+              className="absolute right-2 p-2 text-gray-400 hover:text-gray-600 focus:outline-none transition-colors duration-200"
             >
               <FaPaperPlane className="w-5 h-5" />
             </button>
           </form>
-          <p className="text-center text-xs font-mono mt-4 text-gray-500 dark:text-gray-400">
+          <p className="text-center text-xs font-mono mt-4 text-gray-500">
             astnai can make mistakes
           </p>
         </div>

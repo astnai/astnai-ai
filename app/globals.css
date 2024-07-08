@@ -2,28 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --vh: 1vh;
+}
+
 html, body {
   height: 100%;
+  height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
 }
 
 body {
-  background: linear-gradient(to bottom right, #f9fafb, #f3f4f6);
-  height: 100vh;
-  overflow-y: auto;
-}
-
-.dark body {
-  background: linear-gradient(to bottom right, #111827, #1f2937);
+  background-color: #fff;
+  color: #000;
+  display: flex;
+  flex-direction: column;
 }
 
 .chat-container {
   scrollbar-width: none;
   -ms-overflow-style: none;
+  overflow-x: hidden;
 }
 
 .chat-container::-webkit-scrollbar {
   display: none;
+}
+
+@media (max-width: 640px) {
+  .chat-container > div {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -34,10 +44,6 @@ body {
   background: #f1f1f1;
 }
 
-.dark ::-webkit-scrollbar-track {
-  background: #374151;
-}
-
 ::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 4px;
@@ -45,14 +51,6 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
-}
-
-.dark ::-webkit-scrollbar-thumb {
-  background: #4b5563;
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
 }
 
 @keyframes fadeIn {
@@ -73,4 +71,22 @@ body {
   opacity: 0;
   animation: typewriter 1s forwards;
   animation-delay: calc(var(--index) * 0.03s);
+}
+
+@media (max-height: 600px) {
+  .chat-container {
+    max-height: calc(100vh - 180px);
+  }
+}
+
+#__next {
+  height: 100%;
+}
+
+/* Añadido para evitar que el teclado móvil afecte el diseño */
+@media (max-width: 640px) {
+  body {
+    position: fixed;
+    width: 100%;
+  }
 }
