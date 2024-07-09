@@ -26,6 +26,9 @@ export default function Chat() {
     };
     setVH();
     window.addEventListener("resize", setVH);
+
+    setTimeout(() => inputRef.current?.focus(), 0);
+
     return () => window.removeEventListener("resize", setVH);
   }, []);
 
@@ -54,9 +57,9 @@ export default function Chat() {
   if (!mounted) return null;
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-white">
-      <div className="w-full h-full max-w-2xl flex flex-col bg-white overflow-hidden p-4">
-        <div className="flex-1 overflow-hidden flex flex-col relative">
+    <div className="w-full h-screen flex flex-col items-center justify-center bg-white">
+      <div className="w-full h-full max-w-2xl flex flex-col bg-white overflow-hidden p-4 mx-auto">
+        <div className="flex-1 overflow-hidden flex flex-col relative chat-container">
           <div
             className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 z-10 ${
               showLogo ? "opacity-100" : "opacity-0"
@@ -70,7 +73,7 @@ export default function Chat() {
             />
           </div>
           <div
-            className={`flex-1 overflow-y-auto space-y-6 transition-opacity duration-500 chat-container ${
+            className={`flex-1 overflow-y-auto space-y-6 transition-opacity duration-500 ${
               showLogo ? "opacity-0" : "opacity-100"
             }`}
             ref={chatContainerRef}
@@ -124,7 +127,7 @@ export default function Chat() {
           </div>
         </div>
 
-        <div className="mt-auto bg-white">
+        <div className="input-container max-w-2xl mx-auto w-full">
           <form onSubmit={submitMessage} className="relative flex items-center">
             <input
               ref={inputRef}

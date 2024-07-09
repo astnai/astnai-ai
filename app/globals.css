@@ -6,7 +6,7 @@
   --vh: 1vh;
 }
 
-html, body {
+html, body, #__next {
   height: 100%;
   height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
@@ -20,6 +20,8 @@ body {
 }
 
 .chat-container {
+  height: calc(100% - 100px); /* Ajusta este valor según el tamaño de tu input y otros elementos */
+  overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
   overflow-x: hidden;
@@ -27,6 +29,15 @@ body {
 
 .chat-container::-webkit-scrollbar {
   display: none;
+}
+
+.input-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 10px;
 }
 
 @media (max-width: 640px) {
@@ -81,12 +92,4 @@ body {
 
 #__next {
   height: 100%;
-}
-
-/* Añadido para evitar que el teclado móvil afecte el diseño */
-@media (max-width: 640px) {
-  body {
-    position: fixed;
-    width: 100%;
-  }
 }
