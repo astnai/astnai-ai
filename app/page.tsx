@@ -89,38 +89,56 @@ export default function Chat() {
                   className={`${
                     m.role === "user"
                       ? "bg-gray-100 text-black rounded-3xl p-3"
-                      : "text-black flex items-center rounded-3xl p-3"
+                      : "text-black rounded-3xl p-3"
                   } ${
                     m.role === "assistant" && !animatedMessages.has(m.id)
                       ? "opacity-0"
                       : ""
                   } max-w-[80%] break-words`}
                 >
-                  {m.role === "assistant" && (
-                    <div className="flex-shrink-0 mt-1 mr-2">
-                      <Image
-                        src={logoMeBlack}
-                        alt="Astnai"
-                        width={24}
-                        height={24}
-                      />
-                    </div>
-                  )}
-                  <ReactMarkdown
-                    className="inline-block text-sm whitespace-pre-wrap"
-                    components={{
-                      a: ({ node, ...props }) => (
-                        <a
-                          {...props}
-                          className="text-blue-500 hover:underline"
-                          target="_blank"
-                          rel="noopener noreferrer"
+                  {m.role === "assistant" ? (
+                    <div className="assistant-message">
+                      <div className="flex-shrink-0 mt-1 mr-2">
+                        <Image
+                          src={logoMeBlack}
+                          alt="Astnai"
+                          width={24}
+                          height={24}
                         />
-                      ),
-                    }}
-                  >
-                    {m.content.replace(/【.*?】/g, "")}
-                  </ReactMarkdown>
+                      </div>
+                      <ReactMarkdown
+                        className="inline-block text-sm whitespace-pre-wrap"
+                        components={{
+                          a: ({ node, ...props }) => (
+                            <a
+                              {...props}
+                              className="text-blue-500 hover:underline"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            />
+                          ),
+                        }}
+                      >
+                        {m.content.replace(/【.*?】/g, "")}
+                      </ReactMarkdown>
+                    </div>
+                  ) : (
+                    <ReactMarkdown
+                      className="inline-block text-sm whitespace-pre-wrap"
+                      components={{
+                        a: ({ node, ...props }) => (
+                          <a
+                            {...props}
+                            className="text-blue-500 hover:underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          />
+                        ),
+                      }}
+                    >
+                      {m.content.replace(/【.*?】/g, "")}
+                    </ReactMarkdown>
+                  )}
                 </div>
               </div>
             ))}
@@ -132,7 +150,7 @@ export default function Chat() {
             <input
               ref={inputRef}
               disabled={status !== "awaiting_message"}
-              className="flex-grow p-3 pr-12 bg-gray-100 text-black rounded-full focus:outline-none"
+              className="flex-grow p-3 pr-12 text-black rounded-full focus:outline-none"
               value={input}
               placeholder="message astnai"
               onChange={handleInputChange}
