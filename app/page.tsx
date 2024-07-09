@@ -58,7 +58,7 @@ export default function Chat() {
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center bg-white">
-      <div className="w-full h-full max-w-2xl flex flex-col bg-white overflow-hidden p-4 mx-auto">
+      <div className="w-full h-full max-w-2xl flex flex-col bg-white overflow-hidden p-4 mb-20 mx-auto">
         <div className="flex-1 overflow-hidden flex flex-col relative chat-container">
           <div
             className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 z-10 ${
