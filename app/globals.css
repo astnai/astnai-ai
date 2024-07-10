@@ -14,49 +14,8 @@ html, body, #__next {
 }
 
 body {
-  background-color: #fff;
-  color: #000;
   display: flex;
   flex-direction: column;
-}
-
-.chat-container {
-  height: calc(100% - 140px);
-  overflow-y: scroll;
-  scrollbar-width: none; 
-  -ms-overflow-style: none; 
-}
-
-.chat-container::-webkit-scrollbar {
-  display: none; 
-}
-
-.input-container {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: white;
-  padding: 5px;
-}
-
-.input-container input {
-  background-color: #1c1c1c;
-}
-
-.assistant-message {
-  display: flex;
-  align-items: flex-start;
-}
-
-.assistant-message img {
-  margin-top: -3px;
-  margin-right: 0.5rem;
-  flex-shrink: 0;
-}
-
-.assistant-message .message-content {
-  flex-grow: 1;
 }
 
 @media (max-width: 640px) {
@@ -64,52 +23,4 @@ body {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
-}
-
-body {
-scrollbar-width: 0;
-}
-
-body::-webkit-scrollbar {
-  width: 6px;
-}
-
-body::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: rgba(155, 155, 155, 0.5);
-  border-radius: 20px;
-  border: transparent;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.fade-in {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes typewriter {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-.typewriter-effect span {
-  opacity: 0;
-  animation: typewriter 1s forwards;
-  animation-delay: calc(var(--index) * 0.03s);
-}
-
-@media (max-height: 600px) {
-  .chat-container {
-    max-height: calc(100vh - 200px); 
-  }
-}
-
-#__next {
-  height: 100%;
 }
