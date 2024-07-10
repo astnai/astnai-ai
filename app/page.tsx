@@ -167,7 +167,7 @@ export default function Chat() {
               <FaArrowCircleUp className="w-6 h-6" />
             </button>
           </form>
-          <p className="text-center text-xs font-mono mt-2 text-black">
+          <p className="text-center text-xs font-mono mt-2 mb-1 text-black">
             talk to astnai
           </p>
         </div>
