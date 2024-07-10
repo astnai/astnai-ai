@@ -10,6 +10,7 @@ html, body, #__next {
   height: 100%;
   height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
+  font-family: 'GeistSans', sans-serif;
 }
 
 body {
@@ -20,14 +21,14 @@ body {
 }
 
 .chat-container {
-  height: calc(100% - 140px); /* Aumentado para dar más espacio al final */
+  height: calc(100% - 140px);
   overflow-y: scroll;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
 }
 
 .chat-container::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none; 
 }
 
 .input-container {
@@ -36,7 +37,7 @@ body {
   left: 0;
   right: 0;
   background-color: white;
-  padding: 20px 10px; /* Aumentado el padding superior */
+  padding: 10px;
 }
 
 .input-container input {
@@ -51,7 +52,7 @@ body {
 }
 
 .assistant-message img {
-  margin-top: -3px; /* Ajustado para subir el icono */
+  margin-top: -3px;
   margin-right: 0.5rem;
   flex-shrink: 0;
 }
@@ -67,7 +68,6 @@ body {
   }
 }
 
-/* Estilos para la barra de desplazamiento en el lado derecho de la página */
 body {
   overflow-y: scroll;
   scrollbar-width: thin;
@@ -110,7 +110,7 @@ body::-webkit-scrollbar-thumb {
 
 @media (max-height: 600px) {
   .chat-container {
-    max-height: calc(100vh - 200px); /* Ajustado para dar más espacio */
+    max-height: calc(100vh - 200px); 
   }
 }
 

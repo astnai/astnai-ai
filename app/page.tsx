@@ -6,6 +6,9 @@ import { FaPaperPlane } from "react-icons/fa";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import logoMeBlack from "./logoMeBlack.png";
+import { GeistSans } from "geist/font/sans";
+
+const geistSans = GeistSans;
 
 export default function Chat() {
   const { status, messages, input, submitMessage, handleInputChange } =
@@ -57,7 +60,9 @@ export default function Chat() {
   if (!mounted) return null;
 
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-center bg-white">
+    <div
+      className={`${geistSans.className} w-full h-screen flex flex-col items-center justify-center bg-white`}
+    >
       <div className="w-full h-full max-w-2xl flex flex-col bg-white overflow-hidden p-4 mb-20 mx-auto">
         <div className="flex-1 overflow-hidden flex flex-col relative chat-container">
           <div
@@ -150,7 +155,7 @@ export default function Chat() {
             <input
               ref={inputRef}
               disabled={status !== "awaiting_message"}
-              className="flex-grow p-3 pr-12 text-black rounded-full focus:outline-none"
+              className="flex-grow p-3 pr-12 bg-gray-100 text-black rounded-full focus:outline-none"
               value={input}
               placeholder="message astnai"
               onChange={handleInputChange}

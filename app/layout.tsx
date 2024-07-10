@@ -1,9 +1,9 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import { Metadata, Viewport } from "next";
 import Head from "next/head";
 
-const inter = Inter({ subsets: ["latin"], display: "swap" });
+const geist = GeistSans;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ai.agustinarias.com"),
@@ -11,14 +11,14 @@ export const metadata: Metadata = {
     default: "astnai",
     template: "%s | astnai",
   },
-  description: "Chat with astnai, your personal AI assistant by Agustín Arias.",
+  description: "chat with astnai, your personal ai assistant by agustín arias.",
   openGraph: {
     title: "astnai",
     description:
-      "Chat with astnai, your personal AI assistant by Agustín Arias.",
+      "chat with astnai, your personal ai assistant by agustín arias.",
     url: "https://ai.agustinarias.com",
     siteName: "astnai",
-    locale: "en_US",
+    locale: "en_us",
     type: "website",
     images: [
       {
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     creator: "@astnai",
     title: "astnai",
     description:
-      "Chat with astnai, your personal AI assistant by Agustín Arias.",
+      "chat with astnai, your personal ai assistant by agustín arias.",
     images: "https://ai.agustinarias.com/images/twitter-image.jpg",
   },
   robots: {
@@ -65,7 +65,7 @@ export const viewport: Viewport = {
 const jsonLdData = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Agustín Arias",
+  name: "agustín arias",
   url: "https://ai.agustinarias.com",
   sameAs: [
     "https://www.linkedin.com/in/astnai",
@@ -73,22 +73,22 @@ const jsonLdData = {
     "https://github.com/astnai",
     "https://instagram.com/agustnarias",
   ],
-  jobTitle: "Software Engineer",
+  jobTitle: "software engineer",
   worksFor: {
     "@type": "Organization",
-    name: "Agustín Arias",
+    name: "agustín arias",
   },
   description:
-    "Agustín Arias is a software engineer based in Buenos Aires, originally from Patagonia, Argentina. He is passionate about web development and AI interaction.",
+    "agustín arias is a software engineer based in buenos aires, originally from patagonia, argentina. he is passionate about web development and ai interaction.",
   image: "https://ai.agustinarias.com/images/profile.jpg",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Buenos Aires",
-    addressRegion: "BA",
-    addressCountry: "Argentina",
+    addressLocality: "buenos aires",
+    addressRegion: "ba",
+    addressCountry: "argentina",
   },
-  alumniOf: "Self-taught",
-  birthPlace: "Patagonia, Argentina",
+  alumniOf: "self-taught",
+  birthPlace: "patagonia, argentina",
 };
 
 export default function RootLayout({
@@ -99,22 +99,22 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <Head>
-        <meta charSet="UTF-8" />
+        <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="author" content="Agustín Arias" />
+        <meta name="author" content="agustín arias" />
         <meta
           name="keywords"
           content="software engineer, buenos aires, ai, web development, patagonia, mate, argentina, technology, san francisco, y combinator, guillermo rauch, sam altman, messi, duki"
         />
         <meta
           name="description"
-          content="Chat with astnai, your personal AI assistant by Agustín Arias."
+          content="chat with astnai, your personal ai assistant by agustín arias."
         />
         <meta property="og:title" content="astnai" />
         <meta
           property="og:description"
-          content="Chat with astnai, your personal AI assistant by Agustín Arias."
+          content="chat with astnai, your personal ai assistant by agustín arias."
         />
         <meta
           property="og:image"
@@ -127,7 +127,7 @@ export default function RootLayout({
         <meta name="twitter:title" content="astnai" />
         <meta
           name="twitter:description"
-          content="Chat with astnai, your personal AI assistant by Agustín Arias."
+          content="chat with astnai, your personal ai assistant by agustín arias."
         />
         <meta
           name="twitter:image"
@@ -148,7 +148,7 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <script type="application/ld+json">{JSON.stringify(jsonLdData)}</script>
       </Head>
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className={`${GeistSans.className} antialiased`}>{children}</body>
     </html>
   );
 }
