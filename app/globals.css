@@ -37,13 +37,11 @@ body {
   left: 0;
   right: 0;
   background-color: white;
-  padding: 10px;
+  padding: 5px;
 }
 
 .input-container input {
-  background-color: transparent;
-  border: 1px solid black;
-  border-radius: 9999px;
+  background-color: #1c1c1c;
 }
 
 .assistant-message {
@@ -69,9 +67,7 @@ body {
 }
 
 body {
-  overflow-y: scroll;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+scrollbar-width: 0;
 }
 
 body::-webkit-scrollbar {

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Message, useAssistant } from "ai/react";
-import { FaPaperPlane } from "react-icons/fa";
+import { FaArrowCircleUp } from "react-icons/fa";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import logoMeBlack from "./logoMeBlack.png";
@@ -58,7 +58,6 @@ export default function Chat() {
   }, [status, messages, animatedMessages]);
 
   if (!mounted) return null;
-
   return (
     <div
       className={`${geistSans.className} w-full h-screen flex flex-col items-center justify-center bg-white`}
@@ -93,8 +92,8 @@ export default function Chat() {
                 <div
                   className={`${
                     m.role === "user"
-                      ? "bg-gray-100 text-black rounded-3xl p-3"
-                      : "text-black rounded-3xl p-3"
+                      ? "bg-[#1c1c1c] text-white rounded-full p-2"
+                      : "text-[#1c1c1c] rounded-full p-2"
                   } ${
                     m.role === "assistant" && !animatedMessages.has(m.id)
                       ? "opacity-0"
@@ -103,7 +102,7 @@ export default function Chat() {
                 >
                   {m.role === "assistant" ? (
                     <div className="assistant-message">
-                      <div className="flex-shrink-0 mt-1 mr-2">
+                      <div className="flex-shrink-0 mr-2">
                         <Image
                           src={logoMeBlack}
                           alt="Astnai"
@@ -155,21 +154,21 @@ export default function Chat() {
             <input
               ref={inputRef}
               disabled={status !== "awaiting_message"}
-              className="flex-grow p-3 pr-12 bg-gray-100 text-black rounded-full focus:outline-none"
+              className="flex-grow p-2 pr-12 bg-[#1c1c1c] text-white rounded-full focus:outline-none placeholder-white"
               value={input}
-              placeholder="message astnai"
+              placeholder=""
               onChange={handleInputChange}
             />
             <button
               type="submit"
               disabled={status !== "awaiting_message"}
-              className="absolute right-2 p-2 text-gray-400 hover:text-gray-600 focus:outline-none transition-colors duration-200"
+              className="absolute right-2 p-2 text-white hover:text-neutral-600 focus:outline-none transition-colors duration-200"
             >
-              <FaPaperPlane className="w-5 h-5" />
+              <FaArrowCircleUp className="w-6 h-6" />
             </button>
           </form>
-          <p className="text-center text-xs font-mono mt-4 text-gray-500">
-            astnai can make mistakes
+          <p className="text-center text-xs font-mono mt-2 text-black">
+            talk to astnai
           </p>
         </div>
       </div>
