@@ -19,7 +19,7 @@ const predefinedQuestions = [
 
 export default function Chat() {
   const { status, messages, input, submitMessage, handleInputChange } =
-    useAssistant({ api: "/api/assistant" });
+    useAssistant({ api: "/api" });
   const inputRef = useRef<HTMLInputElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const [showLogo, setShowLogo] = useState(true);
