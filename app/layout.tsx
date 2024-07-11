@@ -1,10 +1,10 @@
-import "./globals.css";
+import "./styles/globals.css";
 import { GeistSans } from "geist/font/sans";
-import Head from "next/head";
+import { Metadata } from "next";
 
-const geist = GeistSans;
+const geistSans = GeistSans;
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "astnai | assistant project",
   description: "your personalized assistant for all things agustín arias",
 };
@@ -16,10 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
-      <body className={geist.className}>{children}</body>
+      <body className={geistSans.className}>{children}</body>
     </html>
   );
 }
