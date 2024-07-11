@@ -21,7 +21,7 @@ export default function PredefinedQuestions({
       {questions.map((question) => (
         <div
           key={question.id}
-          className="bg-neutral-100 rounded-full p-4 cursor-pointer transition-all duration-300 hover:bg-neutral-200 text-center text-sm"
+          className="bg-neutral-100 rounded-2xl p-4 cursor-pointer transition-all duration-300 hover:bg-neutral-200 text-center text-sm"
           onClick={() => handleCardClick(question.text)}
         >
           {question.text}

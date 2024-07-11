@@ -31,9 +31,9 @@ export default function ChatInput({
         <input
           ref={inputRef}
           disabled={status !== "awaiting_message"}
-          className="flex-grow p-3 bg-neutral-100 text-black rounded-full placeholder-neutral-400 transition-all duration-300 focus:outline-none focus:ring-0 focus:border-transparent w-full"
+          className="flex-grow p-3 bg-neutral-100 text-black rounded-2xl placeholder-neutral-400 transition-all duration-300 focus:outline-none focus:ring-0 focus:border-transparent w-full"
           value={input}
-          placeholder="Type your message..."
+          placeholder="message astnai"
           onChange={handleInputChange}
         />
         <button
