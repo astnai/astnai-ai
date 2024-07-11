@@ -23,7 +23,7 @@ export default function ChatInput({
   }, [status]);
 
   return (
-    <div className="bg-white p-4 w-full max-w-2xl mx-auto chat-input-container">
+    <div className="bg-white w-full max-w-2xl mx-auto chat-input-container">
       <form
         onSubmit={submitMessage}
         className="relative flex items-center w-full"
@@ -44,7 +44,7 @@ export default function ChatInput({
           <FaArrowUp className="w-4 h-4" />
         </button>
       </form>
-      <p className="text-center text-xs mb-2 mt-2 text-neutral-400 footer-text">
+      <p className="text-center text-xs mb-2.5 mt-2 text-neutral-400 footer-text">
         astnai provides information about{" "}
         <a
           href="https://agustinarias.com"
