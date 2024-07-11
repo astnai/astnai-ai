@@ -56,7 +56,7 @@ export default function Chat() {
             />
           </div>
           <div
-            className={`h-full overflow-y-auto space-y-6 transition-opacity duration-500 ${
+            className={`h-full overflow-y-auto space-y-6 transition-opacity duration-500 px-4 ${
               showLogo ? "opacity-0" : "opacity-100"
             }`}
             ref={chatContainerRef}
@@ -70,7 +70,7 @@ export default function Chat() {
             ))}
           </div>
         </div>
-        <div className="mt-auto pb-4">
+        <div className="mt-auto">
           <PredefinedQuestions
             questions={predefinedQuestions}
             showCards={showCards}

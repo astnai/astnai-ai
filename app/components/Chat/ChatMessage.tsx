@@ -16,10 +16,10 @@ export default function ChatMessage({ message, isAnimated }: ChatMessageProps) {
       }`}
     >
       <div
-        className={`max-w-[80%] break-words p-3 rounded-full ${
+        className={`max-w-[80%] break-words p-3 rounded-2xl ${
           message.role === "user"
-            ? "bg-neutral-100 text-black"
-            : "bg-transparent text-black"
+            ? "bg-neutral-100 text-black ml-auto mr-2"
+            : "bg-transparent text-black mr-auto ml-2"
         } ${message.role === "assistant" && !isAnimated ? "opacity-0" : ""}`}
       >
         <ReactMarkdown
