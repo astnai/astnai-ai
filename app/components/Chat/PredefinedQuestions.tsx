@@ -14,7 +14,7 @@ export default function PredefinedQuestions({
 }: PredefinedQuestionsProps) {
   return (
     <div
-      className={`grid grid-cols-2 gap-4 mb-36 transition-opacity duration-300 ${
+      className={`grid grid-cols-2 gap-4 mb-4 w-full max-w-2xl mx-auto px-5 transition-opacity duration-300 ${
         showCards ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >

@@ -41,45 +41,54 @@ export default function Chat() {
 
   return (
     <Layout>
-      <div className="flex-1 overflow-hidden flex flex-col">
-        <div
-          className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 z-10 ${
-            showLogo ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <Image src={logoMeBlack} alt="Astnai Logo" width={100} height={100} />
-        </div>
-        <div
-          className={`flex-1 overflow-y-auto space-y-6 transition-opacity duration-500 ${
-            showLogo ? "opacity-0" : "opacity-100"
-          }`}
-          ref={chatContainerRef}
-        >
-          {messages.map((m: Message) => (
-            <ChatMessage
-              key={m.id}
-              message={m}
-              isAnimated={animatedMessages.has(m.id)}
+      <div className="flex flex-col h-full">
+        <div className="flex-grow overflow-hidden relative">
+          <div
+            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 z-10 ${
+              showLogo ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <Image
+              src={logoMeBlack}
+              alt="Astnai Logo"
+              width={100}
+              height={100}
             />
-          ))}
+          </div>
+          <div
+            className={`h-full overflow-y-auto space-y-6 transition-opacity duration-500 ${
+              showLogo ? "opacity-0" : "opacity-100"
+            }`}
+            ref={chatContainerRef}
+          >
+            {messages.map((m: Message) => (
+              <ChatMessage
+                key={m.id}
+                message={m}
+                isAnimated={animatedMessages.has(m.id)}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="mt-auto pb-4">
+          <PredefinedQuestions
+            questions={predefinedQuestions}
+            showCards={showCards}
+            handleCardClick={(question: string) => {
+              handleInputChange({
+                target: { value: question },
+              } as React.ChangeEvent<HTMLInputElement>);
+              setShowCards(false);
+            }}
+          />
+          <ChatInput
+            status={status}
+            input={input}
+            handleInputChange={handleInputChange}
+            submitMessage={submitMessage}
+          />
         </div>
       </div>
-      <PredefinedQuestions
-        questions={predefinedQuestions}
-        showCards={showCards}
-        handleCardClick={(question: string) => {
-          handleInputChange({
-            target: { value: question },
-          } as React.ChangeEvent<HTMLInputElement>);
-          setShowCards(false);
-        }}
-      />
-      <ChatInput
-        status={status}
-        input={input}
-        handleInputChange={handleInputChange}
-        submitMessage={submitMessage}
-      />
     </Layout>
   );
 }

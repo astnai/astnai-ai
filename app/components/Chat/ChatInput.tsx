@@ -23,15 +23,15 @@ export default function ChatInput({
   }, [status]);
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white p-5">
+    <div className="bg-white p-5 w-full max-w-2xl mx-auto">
       <form
         onSubmit={submitMessage}
-        className="relative flex items-center w-full max-w-2xl mx-auto"
+        className="relative flex items-center w-full"
       >
         <input
           ref={inputRef}
           disabled={status !== "awaiting_message"}
-          className="flex-grow p-3 bg-neutral-100 text-black rounded-full placeholder-neutral-400 transition-all duration-300 focus:outline-none focus:ring-0 focus:border-transparent"
+          className="flex-grow p-3 bg-neutral-100 text-black rounded-full placeholder-neutral-400 transition-all duration-300 focus:outline-none focus:ring-0 focus:border-transparent w-full"
           value={input}
           placeholder="Type your message..."
           onChange={handleInputChange}
@@ -50,7 +50,7 @@ export default function ChatInput({
           href="https://agustinarias.com"
           className="underline hover:text-black transition-colors duration-300"
         >
-          agustin arias
+          agustín arias
         </a>
         .
       </p>

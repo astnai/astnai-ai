@@ -5,8 +5,8 @@ import { Metadata } from "next";
 const geistSans = GeistSans;
 
 export const metadata: Metadata = {
-  title: "astnai | assistant project",
-  description: "your personalized assistant for all things agustín arias",
+  title: "astnai",
+  description: "Assistant who provides information about Agustín Arias.",
 };
 
 export default function RootLayout({
