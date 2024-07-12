@@ -23,7 +23,7 @@ export default function ChatInput({
   }, [status]);
 
   return (
-    <div className="bg-white w-full max-w-2xl mx-auto chat-input-container">
+    <div className="bg-white w-full max-w-2xl mx-auto px-5 chat-input-container">
       <form
         onSubmit={submitMessage}
         className="relative flex items-center w-full"

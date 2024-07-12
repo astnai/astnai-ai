@@ -56,7 +56,7 @@ export default function Chat() {
             />
           </div>
           <div
-            className={`h-full overflow-y-auto space-y-6 transition-opacity duration-500 px-4 ${
+            className={`h-full overflow-y-auto space-y-6 transition-opacity duration-500 px-5 ${
               showLogo ? "opacity-0" : "opacity-100"
             }`}
             ref={chatContainerRef}
