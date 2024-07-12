@@ -16,7 +16,7 @@ export default function ChatMessage({ message, isAnimated }: ChatMessageProps) {
       }`}
     >
       <div
-        className={`max-w-[80%] break-words p-2 rounded-full ${
+        className={`max-w-[80%] break-words p-3 mt-8 rounded-3xl ${
           message.role === "user"
             ? "bg-neutral-100 text-black ml-auto mr-2"
             : "bg-transparent text-black mr-auto ml-2"
